@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 
 
+
 export default function TextForm(props) {
   const handleUpClick = ()=>{
     console.log("uppercase was clicked");
@@ -38,19 +39,19 @@ export default function TextForm(props) {
         <h1>{props.heading}</h1>
         <div className="mb-3">
            
-          <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor:props.mode === 'dark' ? '#142d4c':'white' , color:props.mode === 'dark' ? 'white':'black'} } id="myBox" rows="8"></textarea> {/*important*/}
+          <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor:props.mode === 'dark' ? '#13466e':'white' , color:props.mode === 'dark' ? 'white':'black'} } id="myBox" rows="8"></textarea> {/*important*/}
         </div>
-        <button className="btn btn-primary" onClick={handleUpClick}>Convert to upperCase </button>
-        <button className="btn btn-primary" onClick={handleLoClick}>Convert to lowercase </button>
-        <button className="btn btn-primary" onClick={handlePrClick}>Print </button>
-        <button className="btn btn-primary" onClick={handleCopy}>copy </button>
+        <button disabled ={text.length===0} className="btn btn-primary" onClick={handleUpClick}>Convert to upperCase </button>
+        <button disabled ={text.length===0} className="btn btn-primary" onClick={handleLoClick}>Convert to lowercase </button>
+        <button disabled ={text.length===0} className="btn btn-primary" onClick={handlePrClick}>Print </button>
+        <button disabled ={text.length===0} className="btn btn-primary" onClick={handleCopy}>copy </button>
     </div>
     <div className="container my-3"  style={{color:props.mode === 'dark' ? 'white':'black'}}>
       <h2>your Text summary</h2>
-      <p>{} words and {text.length} characters </p> {/*counting words and characters*/}
-      <p>{0.008 * text.split(" ").length} Minutes read</p> {/*time for reading the text*/}
+      <p>{ text.split(/\s+/).filter((element)=>{return element.length!==0},{/*important*/}).length} words and {text.length} characters </p> {/*counting words and characters*/}
+      <p>{0.008 *  text.split(" ").filter((element)=>{return element.length!==0} )} Minutes read</p> {/*time for reading the text*/}
       <h2> Preview</h2>
-      <p>{text.length>0?text:"Enter something to see it here"}</p>
+      <p>{text.length>0?text:"Nothing to preview"}</p>
 
     </div>
     
